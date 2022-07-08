@@ -1,27 +1,15 @@
 pipeline {
     agent any
-
     stages {
-        stage('Compile') {
-
+        stage('Build') {
             steps {
-      		sh "chmod +x gradlew"
-    		sh "./gradlew clean build --no-daemon"
+                sh './gradlew assemble'
             }
         }
-        stage('Unit Tests') {
+        stage('Test') {
             steps {
-                gradlew('test')
-            }
-            post {
-                always {
-                    junit '**/build/test-results/test/TEST-*.xml'
-                }
+                sh './gradlew test'
             }
         }
     }
-}
-
-def gradlew(String... args) {
-    sh "./gradlew ${args.join(' ')} -s"
 }
