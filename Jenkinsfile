@@ -7,6 +7,7 @@ pipeline {
             steps {
 		echo 'Compile project'
     		sh "chmod +x gradlew"
+		gradlew('compile')
             }
         }
         stage('Unit Tests') {
