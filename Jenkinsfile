@@ -8,7 +8,6 @@ pipeline {
 		echo 'Compile project'
     		sh "chmod +x gradlew"
     		sh "./gradlew clean build --no-daemon"
-                gradlew('clean','classes')
             }
         }
         stage('Unit Tests') {
