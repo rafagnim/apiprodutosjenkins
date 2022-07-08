@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew assemble'
+      		sh "chmod +x gradlew"
+    		sh "./gradlew clean build --no-daemon"
             }
         }
         stage('Test') {
