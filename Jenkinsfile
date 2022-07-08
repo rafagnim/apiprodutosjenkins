@@ -2,21 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Compile') {
+        stage('Compile and Tests') {
 
             steps {
-		echo 'Compile project'
-    		sh "chmod +x gradlew"
-		gradlew('compile')
-            }
-        }
-        stage('Unit Tests') {
-            steps {
-                gradlew('test')
-            }
-            post {
-                always {
-                    junit '**/build/test-results/test/TEST-*.xml'
+                script {
+                    try {
+                        sh './gradlew clean test --no-daemon' //run a gradle task
+                    } finally {
+                        junit '**/build/test-results/test/*.xml' //make the junit test results available in any case (success & failure)
+                    }
                 }
             }
         }
