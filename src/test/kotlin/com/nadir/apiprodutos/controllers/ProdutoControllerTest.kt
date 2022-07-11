@@ -5,6 +5,7 @@ import com.nadir.apiprodutos.components.ProdutoComponent
 import com.nadir.apiprodutos.entities.Produto
 import com.nadir.apiprodutos.exceptions.AuthenticationException
 import com.nadir.apiprodutos.integration.feign.client.UsuarioClient
+import com.nadir.apiprodutos.repositories.ProdutoRepository
 import com.nadir.apiprodutos.requests.EstoqueRequest
 import com.nadir.apiprodutos.requests.ProdutoRequest
 import com.nadir.apiprodutos.services.ProdutoService
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.*
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.mock.mockito.SpyBean
@@ -34,7 +36,6 @@ private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
 @SpringBootTest
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
-
 
     private lateinit var produtoAtivo: Produto
     private lateinit var produtoInativo: Produto
