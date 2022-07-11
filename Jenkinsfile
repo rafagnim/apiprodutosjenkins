@@ -4,12 +4,12 @@ pipeline {
         stage('Build') {
             steps {
       		sh "chmod +x gradlew"
-    		sh "./gradlew clean build --stacktrace"
+    		sh "./gradlew clean build --scan"
             }
         }
         stage('Test') {
             steps {
-                sh './gradlew test --stacktrace'
+                sh './gradlew test --scan'
             }
         }
     }
