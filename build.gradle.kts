@@ -28,6 +28,7 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.29")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
+	testImplementation("org.flywaydb:flyway-core:8.1.0-test")
 
 	//Gson
 	implementation("com.google.code.gson:gson:2.9.0")
