@@ -4,12 +4,12 @@ pipeline {
         stage('Build') {
             steps {
       		sh "chmod +x gradlew"
-    		sh "./gradlew clean build --scan"
+    		 sh "./gradlew bootJar"
             }
         }
         stage('Test') {
             steps {
-                sh './gradlew test --scan'
+                sh './gradlew test'
             }
         }
     }
