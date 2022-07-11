@@ -36,5 +36,5 @@ class ProdutoService (
         produtoRepository.save(it)
     }
 
-    fun findById(id: Long) = produtoRepository.findById(id).orElseThrow()
+    fun findById(id: Long) = produtoRepository.findById(id).orElseThrow { NotFoundException("User with id %s not exists.".format(id)) }
 }
