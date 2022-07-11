@@ -1,3 +1,4 @@
+pipeline {
 import groovy.sql.Sql
 node{
     def conn = Sql.newInstance("jdbc:mysql://localhost:3306/cms", "root", "", "com.mysql.jdbc.Driver")
@@ -5,8 +6,6 @@ node{
     assert rows.size() == 10
     println rows.join('\n')
 }
-
-pipeline {
     agent any
     stages {
         stage('Build') {
