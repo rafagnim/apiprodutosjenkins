@@ -38,7 +38,7 @@ class ProdutoController (
                 val produto: Produto = produtoService.findById(it.idProduto)
                 if (produto.quantidade >= it.qtdItensComprados) {
                     produto.quantidade = produto.quantidade.minus(it.qtdItensComprados)
-                    produto.quantidadeReservadaCarrinho = produto.quantidadeReservadaCarrinho?.plus(it.qtdItensComprados)
+                    produto.quantidadeReservadaCarrinho = produto.quantidadeReservadaCarrinho.plus(it.qtdItensComprados)
                     produtoService.save(produto)
                     return true
                 }
