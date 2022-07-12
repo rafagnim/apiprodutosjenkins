@@ -35,6 +35,7 @@ import java.math.BigDecimal
 
 
 private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
+@SpringBootTest
 @Transactional
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
