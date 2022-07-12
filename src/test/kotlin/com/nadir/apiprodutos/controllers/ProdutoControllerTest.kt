@@ -69,10 +69,10 @@ class ProdutoControllerTest(): AbstractTest() {
 
     }
 
-    @AfterEach
-    fun apagaDB() {
-        //produtoRepository.deleteAll()
-    }
+//    @AfterEach
+//    fun apagaDB() {
+//        //produtoRepository.deleteAll()
+//    }
 
     @Test
     fun `quando getAll produtos do DB`() {
