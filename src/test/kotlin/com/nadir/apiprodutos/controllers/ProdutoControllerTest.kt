@@ -30,13 +30,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
 
 
 private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
-
-@RunWith(SpringRunner::class)
-@SpringBootTest
+@Transactional
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
 
