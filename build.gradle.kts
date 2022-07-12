@@ -17,6 +17,8 @@ repositories {
 	mavenCentral()
 }
 
+extra["testcontainersVersion"] = "1.17.3"
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-amqp")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -30,6 +32,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
 	//testImplementation("org.flywaydb:flyway-core:8.1.0-test")
+	testImplementation("org.testcontainers:junit-jupiter")
 
 	//Gson
 	implementation("com.google.code.gson:gson:2.9.0")
@@ -49,6 +52,11 @@ dependencies {
 
 }
 
+dependencyManagement {
+	imports {
+		mavenBom("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}")
+	}
+}
 
 extra["springCloudVersion"] = "2021.0.3"
 dependencyManagement {
@@ -57,6 +65,7 @@ dependencyManagement {
 	}
 }
 
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -64,6 +73,6 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
+//tasks.withType<Test> {
+//	useJUnitPlatform()
+//}
