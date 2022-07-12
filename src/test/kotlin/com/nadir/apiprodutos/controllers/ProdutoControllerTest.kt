@@ -5,7 +5,6 @@ import com.nadir.apiprodutos.components.ProdutoComponent
 import com.nadir.apiprodutos.entities.Produto
 import com.nadir.apiprodutos.exceptions.AuthenticationException
 import com.nadir.apiprodutos.integration.feign.client.UsuarioClient
-import com.nadir.apiprodutos.repositories.ProdutoRepository
 import com.nadir.apiprodutos.requests.EstoqueRequest
 import com.nadir.apiprodutos.requests.ProdutoRequest
 import com.nadir.apiprodutos.services.ProdutoService
@@ -14,30 +13,30 @@ import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.runner.RunWith
 import org.mockito.*
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.flyway.FlywayDataSource
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.mock.mockito.SpyBean
+import org.springframework.context.ApplicationContext
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
-import org.springframework.test.context.jdbc.Sql
+import org.springframework.test.context.BootstrapWith
+import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.testcontainers.junit.jupiter.Testcontainers
-import java.lang.Exception
 import java.math.BigDecimal
 
 
 private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
 
-@FlywayDataSource
+@RunWith(SpringRunner::class)
+@SpringBootTest
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
 
