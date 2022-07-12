@@ -27,13 +27,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.lang.Exception
 import java.math.BigDecimal
 
 
 private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
 
-@SpringBootTest("ProdutoController::class")
+@SpringBootTest
+@Testcontainers
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
 
