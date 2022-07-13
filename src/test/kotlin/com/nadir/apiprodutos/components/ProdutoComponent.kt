@@ -42,5 +42,25 @@ class ProdutoComponent {
         ) : ProdutoRequest {
             return ProdutoRequest(nome, quantidade, quantidadeReservadaCarrinho, valorUnitario, descricao)
         }
+
+        fun getListActiveProdutoEntity(qtd : Int) : List<Produto>{
+            val list : MutableList<Produto> = mutableListOf()
+            for (i in 0..qtd){
+                list.add(buildRandomProduct())
+            }
+            return list
+        }
+
+        private fun buildRandomProduct() : Produto{
+            return Produto(Random().nextLong(1000),
+                nome ="Product ${Random().nextInt(1000)}",
+                quantidade = BigDecimal.valueOf(Random().nextLong(1000)),
+                quantidadeReservadaCarrinho = BigDecimal.valueOf(Random().nextLong(10)),
+                valorUnitario = BigDecimal.valueOf(Random().nextLong(50)),
+                descricao = "Product Description ${Random().nextInt(1000)}",
+                isActive = true)
+        }
     }
+
+
 }
