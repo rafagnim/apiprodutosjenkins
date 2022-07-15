@@ -41,6 +41,10 @@ private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
 class ProdutoControllerTest(): AbstractTest() {
 
 
+
+    @InjectMockKs
+    private lateinit var productController: ProdutoController
+
     @InjectMockKs
     private lateinit var productService: ProdutoService
 
