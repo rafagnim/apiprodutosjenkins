@@ -44,7 +44,7 @@ class ProductServiceTestContainer {
     companion object {
         @Container
         val container = MySQLContainer<Nothing>("mysql").apply {
-            withDatabaseName("apiprodutos")
+            withDatabaseName("apiprodutostest")
             withUsername("root")
             withPassword("admin")
         }

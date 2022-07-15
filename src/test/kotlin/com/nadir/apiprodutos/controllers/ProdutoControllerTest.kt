@@ -41,7 +41,6 @@ class ProdutoControllerTest(): AbstractTest() {
 
     private lateinit var produtoAtivo: Produto
     private lateinit var produtoInativo: Produto
-    private var id: Long = 0
     private lateinit var produtoLista: List<Produto>
     private lateinit var produtoRequest: ProdutoRequest
 
@@ -61,7 +60,7 @@ class ProdutoControllerTest(): AbstractTest() {
     companion object {
         @Container
         val container = MySQLContainer<Nothing>("mysql").apply {
-            withDatabaseName("apiprodutos")
+            withDatabaseName("apiprodutostest")
             withUsername("root")
             withPassword("admin")
         }

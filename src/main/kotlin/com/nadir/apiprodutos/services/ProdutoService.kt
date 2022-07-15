@@ -31,10 +31,10 @@ class ProdutoService (
     }
 
     @CacheEvict(allEntries = true, cacheNames = ["getAll"])
-    fun enable(id: Long) = produtoRepository.findById(id).orElseThrow { NotFoundException("User with id %s not exists.".format(id)) }.let {
+    fun enable(id: Long) = produtoRepository.findById(id).orElseThrow { NotFoundException("Produto with id %s not exists.".format(id)) }.let {
         it.isActive = true
         produtoRepository.save(it)
     }
 
-    fun findById(id: Long) = produtoRepository.findById(id).orElseThrow { NotFoundException("User with id %s not exists.".format(id)) }
+    fun findById(id: Long) = produtoRepository.findById(id).orElseThrow { NotFoundException("Produto with id %s not exists.".format(id)) }
 }
