@@ -5,7 +5,6 @@ import com.nadir.apiprodutos.entities.Produto
 import com.nadir.apiprodutos.exceptions.EstoqueNaoZeradoException
 import com.nadir.apiprodutos.exceptions.NotFoundException
 import com.nadir.apiprodutos.repositories.ProdutoRepository
-import com.nadir.apiprodutos.requests.ProdutoRequest
 import com.nadir.apiprodutos.services.ProdutoService
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach

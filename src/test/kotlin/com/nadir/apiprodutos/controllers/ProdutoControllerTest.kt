@@ -5,40 +5,36 @@ import com.nadir.apiprodutos.components.ProdutoComponent
 import com.nadir.apiprodutos.entities.Produto
 import com.nadir.apiprodutos.exceptions.AuthenticationException
 import com.nadir.apiprodutos.integration.feign.client.UsuarioClient
-import com.nadir.apiprodutos.repositories.ProdutoRepository
 import com.nadir.apiprodutos.requests.EstoqueRequest
 import com.nadir.apiprodutos.requests.ProdutoRequest
 import com.nadir.apiprodutos.services.ProdutoService
 import com.nadir.apiprodutos.util.AbstractTest
-import io.mockk.impl.annotations.InjectMockKs
-import io.mockk.impl.annotations.MockK
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.extension.ExtendWith
-import org.junit.runner.RunWith
 import org.mockito.*
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.testcontainers.containers.MySQLContainer
+import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.math.BigDecimal
 
 
 private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
 
+@Testcontainers
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
 
@@ -61,6 +57,24 @@ class ProdutoControllerTest(): AbstractTest() {
     @Captor
     private lateinit var captor: ArgumentCaptor<Long>
 
+
+    companion object {
+        @Container
+        val container = MySQLContainer<Nothing>("mysql").apply {
+            withDatabaseName("apiprodutos")
+            withUsername("root")
+            withPassword("admin")
+        }
+
+        @JvmStatic
+        @DynamicPropertySource
+        fun properties(registry: DynamicPropertyRegistry) {
+            registry.add("spring.datasource.url", container::getJdbcUrl);
+            registry.add("spring.datasource.password", container::getPassword);
+            registry.add("spring.datasource.username", container::getUsername);
+        }
+    }
+
     @BeforeEach
     fun setup() {
         produtoAtivo = ProdutoComponent.createActiveProdutoEntity()
@@ -73,11 +87,6 @@ class ProdutoControllerTest(): AbstractTest() {
         `when`(usuarioClient.validaToken(AUTHORIZATIONHEADER)).thenReturn(1L )
 
     }
-
-//    @AfterEach
-//    fun apagaDB() {
-//        //produtoRepository.deleteAll()
-//    }
 
     @Test
     fun `quando getAll produtos do DB`() {
