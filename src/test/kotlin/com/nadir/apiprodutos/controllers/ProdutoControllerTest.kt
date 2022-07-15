@@ -10,6 +10,7 @@ import com.nadir.apiprodutos.requests.EstoqueRequest
 import com.nadir.apiprodutos.requests.ProdutoRequest
 import com.nadir.apiprodutos.services.ProdutoService
 import com.nadir.apiprodutos.util.AbstractTest
+import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -39,6 +40,9 @@ private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
 
+
+    @InjectMockKs
+    private lateinit var productService: ProdutoService
 
     @MockK
     private lateinit var productRepository: ProdutoRepository
