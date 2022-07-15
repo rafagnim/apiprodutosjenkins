@@ -51,6 +51,15 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
 	testImplementation("org.mockito:mockito-junit-jupiter:4.4.0")
 
+	//MockK
+	testImplementation("io.mockk:mockk:1.12.0")
+
+	//Testcontainers
+	testImplementation("org.testcontainers:testcontainers:1.17.3")
+	testImplementation("org.testcontainers:junit-jupiter:1.17.3")
+	testImplementation("org.testcontainers:mysql:1.17.3")
+
+	//implementation ("com.github.docker-java:docker-java-api:3.2.8")
 }
 
 dependencyManagement {
