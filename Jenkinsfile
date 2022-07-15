@@ -10,7 +10,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh "chmod 755 gradlew"
-    		    sh "./gradlew test --tests"
+    		    sh "./gradlew test -d"
             }
         }
     }
