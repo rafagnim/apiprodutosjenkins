@@ -25,6 +25,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
@@ -36,20 +37,10 @@ import java.math.BigDecimal
 private const val AUTHORIZATIONHEADER: String = "Bearer eh..."
 
 @SpringBootTest
-@Testcontainers
+@ExtendWith(SpringExtension::class)
 @ExtendWith(MockitoExtension::class)
 class ProdutoControllerTest(): AbstractTest() {
 
-
-
-    @InjectMockKs
-    private lateinit var productController: ProdutoController
-
-    @InjectMockKs
-    private lateinit var productService: ProdutoService
-
-    @MockK
-    private lateinit var productRepository: ProdutoRepository
 
     private lateinit var produtoAtivo: Produto
     private lateinit var produtoInativo: Produto
