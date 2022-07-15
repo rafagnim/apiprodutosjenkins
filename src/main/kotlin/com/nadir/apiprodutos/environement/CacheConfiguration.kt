@@ -25,22 +25,22 @@ class CacheConfiguration(
             .serializeValuesWith(SerializationPair.fromSerializer(GenericJackson2JsonRedisSerializer()))
     }
 
-    @Bean
-    fun redisCacheManagerBuilderCustomizer(): RedisCacheManagerBuilderCustomizer? {
-        val jackson2JsonRedisSerializer = Jackson2JsonRedisSerializer(Produto::class.java).apply {
-            this.setObjectMapper(objectMapper)
-        }
-        return RedisCacheManagerBuilderCustomizer { builder: RedisCacheManagerBuilder ->
-            builder
-                .withCacheConfiguration(
-                    "getAll",
-                    RedisCacheConfiguration.defaultCacheConfig()
-                        .entryTtl(Duration.ofMinutes(5))
-                        .disableCachingNullValues()
-                        .serializeValuesWith(SerializationPair.fromSerializer(GenericJackson2JsonRedisSerializer()))
-                )
-        }
-    }
+//    @Bean
+//    fun redisCacheManagerBuilderCustomizer(): RedisCacheManagerBuilderCustomizer? {
+//        val jackson2JsonRedisSerializer = Jackson2JsonRedisSerializer(Produto::class.java).apply {
+//            this.setObjectMapper(objectMapper)
+//        }
+//        return RedisCacheManagerBuilderCustomizer { builder: RedisCacheManagerBuilder ->
+//            builder
+//                .withCacheConfiguration(
+//                    "getAll",
+//                    RedisCacheConfiguration.defaultCacheConfig()
+//                        .entryTtl(Duration.ofMinutes(5))
+//                        .disableCachingNullValues()
+//                        .serializeValuesWith(SerializationPair.fromSerializer(GenericJackson2JsonRedisSerializer()))
+//                )
+//        }
+//    }
 
 
 //    @Bean

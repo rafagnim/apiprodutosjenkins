@@ -218,7 +218,7 @@ class ProdutoControllerTest(): AbstractTest() {
                 .header(HttpHeaders.AUTHORIZATION, AUTHORIZATIONHEADER)
                 .contentType(MediaType.APPLICATION_JSON))
             .andDo(print())
-            .andExpect(jsonPath("$.isActive").value(true))
+            .andExpect(jsonPath("$.isActive").value(false))
     }
 
     @Test

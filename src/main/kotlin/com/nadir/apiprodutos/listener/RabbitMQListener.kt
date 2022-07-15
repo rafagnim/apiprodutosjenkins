@@ -27,7 +27,7 @@ class RabbitMQListener (
         val baixaEstoque = mapper.readValue<Entrega>(entrega)
         log.info("$baixaEstoque")
         var produto: Produto = produtoService.findById(baixaEstoque.idProduto)
-        produto.quantidadeReservadaCarrinho = produto.quantidadeReservadaCarrinho?.minus(baixaEstoque.qtdItensComprados)
+        produto.quantidadeReservadaCarrinho = produto.quantidadeReservadaCarrinho.minus(baixaEstoque.qtdItensComprados)
         produtoService.save(produto)
     }
 }
