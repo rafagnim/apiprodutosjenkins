@@ -56,8 +56,11 @@ DOCKER_TLS_VERIFY	0
 DOCKER_CERT_PATH	\\wsl$\home\$USER_NAME\.docker
 
 Obs.: pode ser necessário substituir localhost pelo IP obtido no LINUX (ifconfig eth0)
-Obs.: infelizmente, neste caso, a cada vez que reiniciar o docker, será necessário alterar esta variável para o IP gerado (ou então buscar uma alternativa para "trava" o IP no LINUX)
+
+Obs.: infelizmente, neste caso, a cada vez que reiniciar o docker, será necessário alterar esta variável para o IP gerado (ou então buscar uma alternativa para "travar" o IP no LINUX)
+
 Obs.: $USER_NAME = usuário do LINUX
+
 Obs.: Se a IDE estiver aberta, reiniciar novamente para que utilize as variáveis de ambiente alteradas (não há necessidade de reiniciar o Windows)
 <hr>
 
