@@ -35,7 +35,7 @@ https://gist.github.com/sz763/3b0a5909a03bf2c9c5a057d032bd98b7
 
 Segue uma transcrição resumida:
 
-Criar mo Linux: daemon.json file in /etc/docker, com o seguinte conteúdo:
+Criar no Linux: daemon.json file in /etc/docker, com o seguinte conteúdo:
 {"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}
 
 Reinicializar o docker daemon:
