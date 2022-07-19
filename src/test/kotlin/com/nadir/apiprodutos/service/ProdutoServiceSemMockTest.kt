@@ -46,21 +46,16 @@ class ProdutoServiceSemMockTest {
         @JvmStatic
         @DynamicPropertySource
         fun properties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url", container::getJdbcUrl);
-            registry.add("spring.datasource.password", container::getPassword);
-            registry.add("spring.datasource.username", container::getUsername);
+            registry.add("spring.datasource.url", container::getJdbcUrl)
+            registry.add("spring.datasource.password", container::getPassword)
+            registry.add("spring.datasource.username", container::getUsername)
+            registry.add("spring.redis.host", redis::getHost)
+            registry.add("spring.redis.port", redis::getFirstMappedPort )
+
+
         }
     }
 
-    @BeforeEach
-    fun setup(){
-        redis.start()
-    }
-
-    @AfterEach
-    fun down(){
-        redis.stop()
-    }
 
     @Test
     fun `quando solicitado salva um produto no repository`() {
