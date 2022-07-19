@@ -5,14 +5,18 @@ import com.nadir.apiprodutos.entities.Produto
 import com.nadir.apiprodutos.requests.ProdutoRequest
 import com.nadir.apiprodutos.services.ProdutoService
 import junit.framework.Assert.assertEquals
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
+import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+
 
 @Testcontainers
 @SpringBootTest
@@ -31,7 +35,12 @@ class ProdutoServiceSemMockTest {
         val container = MySQLContainer<Nothing>("mysql").apply {
             withDatabaseName("apiprodutostest")
             withUsername("root")
-            withPassword("admin")
+            withPassword("")
+        }
+
+        @Container
+        val redis = GenericContainer<Nothing>("redis:5.0.8-alpine3.11").apply {
+            withExposedPorts(6379)
         }
 
         @JvmStatic
@@ -41,6 +50,16 @@ class ProdutoServiceSemMockTest {
             registry.add("spring.datasource.password", container::getPassword);
             registry.add("spring.datasource.username", container::getUsername);
         }
+    }
+
+    @BeforeEach
+    fun setup(){
+        redis.start()
+    }
+
+    @AfterEach
+    fun down(){
+        redis.stop()
     }
 
     @Test
