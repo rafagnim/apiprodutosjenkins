@@ -32,11 +32,7 @@ class ProdutoServiceSemMockTest {
 
     companion object {
         @Container
-        val container = MySQLContainer<Nothing>("mysql").apply {
-            withDatabaseName("apiprodutostest")
-            withUsername("root")
-            withPassword("")
-        }
+        val container = MySQLContainer<Nothing>("mysql")
 
         @Container
         val redis = GenericContainer<Nothing>("redis:5.0.8-alpine3.11").apply {
