@@ -6,30 +6,53 @@ import com.nadir.apiprodutos.exceptions.EstoqueNaoZeradoException
 import com.nadir.apiprodutos.exceptions.NotFoundException
 import com.nadir.apiprodutos.repositories.ProdutoRepository
 import com.nadir.apiprodutos.services.ProdutoService
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
+import org.testcontainers.containers.MySQLContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.math.BigDecimal
 import java.util.*
 
 
-@SpringBootTest
+//@SpringBootTest
+@Testcontainers
 @ExtendWith(MockitoExtension::class)
 class ProdutoServiceTest {
+
     @InjectMocks
     private lateinit var produtoService: ProdutoService
+
     @Mock
     private lateinit var produtoRepository: ProdutoRepository
 
     private lateinit var produto: Produto
     private lateinit var produtoList: List<Produto>
+
+    companion object {
+        @Container
+        val container = MySQLContainer<Nothing>("mysql")
+
+        @JvmStatic
+        @DynamicPropertySource
+        fun properties(registry: DynamicPropertyRegistry) {
+            registry.add("spring.datasource.url", container::getJdbcUrl);
+            registry.add("spring.datasource.password", container::getPassword);
+            registry.add("spring.datasource.username", container::getUsername);
+        }
+    }
 
     @BeforeEach
     fun setup() {
@@ -46,9 +69,12 @@ class ProdutoServiceTest {
     @Test
     fun `quando solicita allProdutos o repositorio deve retornar uma lista populada`() {
         val listaARetornar: List<Produto>?
+
         `when`(produtoRepository.findAll()).thenReturn(produtoList)
+
         listaARetornar = produtoService.findAll()
-        verify(produtoRepository, only()).findAll()
+
+        //verify(produtoRepository, only()).findAll()
         assertEquals(produtoList, listaARetornar)
         assertEquals(produtoList.size, listaARetornar.size)
     }

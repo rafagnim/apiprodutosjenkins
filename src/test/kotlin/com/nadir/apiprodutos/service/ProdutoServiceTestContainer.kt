@@ -43,11 +43,7 @@ class ProductServiceTestContainer {
 
     companion object {
         @Container
-        val container = MySQLContainer<Nothing>("mysql").apply {
-            withDatabaseName("apiprodutostest")
-            withUsername("root")
-            withPassword("admin")
-        }
+        val container = MySQLContainer<Nothing>("mysql")
 
         @JvmStatic
         @DynamicPropertySource
