@@ -27,7 +27,7 @@ import java.math.BigDecimal
 import java.util.*
 
 
-//@SpringBootTest
+@SpringBootTest
 @Testcontainers
 @ExtendWith(MockitoExtension::class)
 class ProdutoServiceTest {
@@ -68,13 +68,11 @@ class ProdutoServiceTest {
 
     @Test
     fun `quando solicita allProdutos o repositorio deve retornar uma lista populada`() {
-        val listaARetornar: List<Produto>?
-
         `when`(produtoRepository.findAll()).thenReturn(produtoList)
 
-        listaARetornar = produtoService.findAll()
+        val listaARetornar = produtoService.findAll()
 
-        //verify(produtoRepository, only()).findAll()
+        verify(produtoRepository, only()).findAll()
         assertEquals(produtoList, listaARetornar)
         assertEquals(produtoList.size, listaARetornar.size)
     }
